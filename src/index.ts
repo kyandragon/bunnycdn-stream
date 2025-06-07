@@ -731,6 +731,33 @@ export class BunnyCdnStream {
 			.digest("hex");
 	}
 
+	/**
+	 * Add an output codec to a video
+	 * @returns A {@link BunnyCdnStreamVideo}
+	 * @param videoId The video ID
+	 * @param codec The codec to add
+	 * @example
+	 * ```typescript
+	 * await stream.addOutputCodecToVideo("0273f24a-79d1-d0fe-97ca-b0e36bed31es", "x264")
+	 * ```
+	 */
+	public async addOutputCodecToVideo(
+		videoId: string,
+		codec: keyof typeof this.outputCodecs,
+	): Promise<BunnyCdnStreamVideo> {
+		const options = this.getOptions();
+		options.url += `/library/${this.options.videoLibrary}/videos/${videoId}/outputs/${this.outputCodecs[codec]}`;
+		options.method = "PUT";
+		return this.request<BunnyCdnStreamVideo>(options, "addOutputCodecToVideo");
+	}
+
+	public outputCodecs = {
+		x264: 0,
+		vp9: 1,
+		hevc: 2,
+		av1: 3,
+	} as const;
+
 	// biome-ignore lint/suspicious/noExplicitAny: required by axios types
 	private async request<ResponseType extends Record<string, any>>(
 		options: AxiosRequestConfig,
