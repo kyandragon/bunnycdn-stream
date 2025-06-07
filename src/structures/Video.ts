@@ -13,6 +13,7 @@ export class BunnyCdnStreamVideo {
 	public width: number;
 	public height: number;
 	public availableResolutions: string;
+	public outputCodecs: string;
 	public thumbnailCount: number;
 	public encodeProgress: number;
 	public storageSize: number;
@@ -56,6 +57,7 @@ export class BunnyCdnStreamVideo {
 		this.width = data.width;
 		this.height = data.height;
 		this.availableResolutions = data.availableResolutions;
+		this.outputCodecs = data.outputCodecs;
 		this.thumbnailCount = data.thumbnailCount;
 		this.encodeProgress = data.encodeProgress;
 		this.storageSize = data.storageSize;
@@ -76,5 +78,9 @@ export class BunnyCdnStreamVideo {
 		return this.availableResolutions
 			.split(",")
 			.map((x) => Number.parseInt(x, 10));
+	}
+
+	public get codecs() {
+		return this.outputCodecs.split(",");
 	}
 }

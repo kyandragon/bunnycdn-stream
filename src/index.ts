@@ -789,6 +789,7 @@ export namespace BunnyCdnStream {
 		width: number;
 		height: number;
 		availableResolutions: string;
+		outputCodecs: string;
 		thumbnailCount: number;
 		encodeProgress: number;
 		storageSize: number;
