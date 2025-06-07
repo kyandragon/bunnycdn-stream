@@ -383,6 +383,25 @@ describe("BunnyCdnStream", () => {
 				}),
 			).rejects.toThrow();
 		});
+
+		test("GIVEN library w/ a video THEN can add output codec", async () => {
+			const video = await stream.getVideo(videoGuid);
+			const response = await stream.addOutputCodecToVideo(video.guid, "vp9");
+			expect(response).toMatchObject({
+				videoLibraryId: expect.any(Number),
+				guid: expect.any(String),
+				title: expect.any(String),
+				dateUploaded: expect.any(String),
+				views: expect.any(Number),
+				isPublic: expect.any(Boolean),
+				length: expect.any(Number),
+				status: expect.any(Number),
+				framerate: expect.any(Number),
+				rotation: expect.any(Number),
+				width: expect.any(Number),
+				height: expect.any(Number),
+			});
+		});
 	});
 
 	describe("can use tus", () => {
